@@ -63,13 +63,15 @@ class NewsListFragment : Fragment() {
         })
     }
 
+    // Opens a new page if url exists
     private fun openNewsPage(url: String?) {
-        val page: Uri = Uri.parse(url)
-        val intent = Intent(Intent.ACTION_VIEW, page)
-        val packageManager = activity?.packageManager
-        if (packageManager?.let { intent.resolveActivity(it) } != null) {
-            startActivity(intent)
+        if(url != null || url != "") {
+            val page: Uri = Uri.parse(url)
+            val intent = Intent(Intent.ACTION_VIEW, page)
+            val packageManager = activity?.packageManager
+            if (packageManager?.let { intent.resolveActivity(it) } != null) {
+                startActivity(intent)
+            }
         }
     }
-
 }
