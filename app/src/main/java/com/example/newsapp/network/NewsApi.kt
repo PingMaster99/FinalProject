@@ -55,7 +55,8 @@ interface AlgoliaApiService {
             Deferred<Website>
 
     /**
-     * Same method as above, but uses only point number and author as queries
+     * Similar method as the one above, but uses only point number and author as queries
+     * it also returns news articles by date (most recent)
      */
     @GET("search_by_date?tags=story")
     fun getNoQueryNewsAsync(@Query("numericFilters", encoded = true) points: String?,
