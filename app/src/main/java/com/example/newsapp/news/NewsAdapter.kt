@@ -10,50 +10,51 @@ import com.example.newsapp.network.News
 
 /**
  * This class implements a [RecyclerView] [ListAdapter] which uses Data Binding to present [List]
- * data, including computing diffs between lists.
+ * data, including computing diffs between lists. Based on MyGithub app by Oscar Gil and Android
+ * Codelabs (Mars Real Estate).
  * @param onClick
  */
 class NewsAdapter( val onClickListener: OnClickListener ) :
-    ListAdapter<News, NewsAdapter.RepoViewHolder>(DiffCallback) {
+    ListAdapter<News, NewsAdapter.NewsViewHolder>(DiffCallback) {
 
     /**
      * Create new [RecyclerView] item views (invoked by the layout manager)
      */
     override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): RepoViewHolder {
-        return RepoViewHolder.from(parent)
+                                    viewType: Int): NewsViewHolder {
+        return NewsViewHolder.from(parent)
     }
 
     /**
      * Replaces the contents of a view (invoked by the layout manager)
      */
-    override fun onBindViewHolder(holderRepo: RepoViewHolder, position: Int) {
+    override fun onBindViewHolder(holderNews: NewsViewHolder, position: Int) {
         val githubRepo = getItem(position)
-        holderRepo.itemView.setOnClickListener {
+        holderNews.itemView.setOnClickListener {
             onClickListener.onClick(githubRepo)
         }
-        holderRepo.bind(githubRepo)
+        holderNews.bind(githubRepo)
     }
 
     /**
      * The RepoViewHolder constructor takes the binding variable from the associated
-     * RepoItemLayout, which nicely gives it access to the full [GithubRepo] information.
+     * NewsItemLayout, which nicely gives it access to the full [News] information.
      */
-    class RepoViewHolder(private var binding: NewsLayoutBinding):
+    class NewsViewHolder(private var binding: NewsLayoutBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(githubRepo: News) {
-            binding.news = githubRepo
+        fun bind(news: News) {
+            binding.news = news
             // This is important, because it forces the data binding to execute immediately,
             // which allows the RecyclerView to make the correct view size measurements
             binding.executePendingBindings()
         }
 
         companion object {
-            fun from(parent: ViewGroup) : RepoViewHolder {
+            fun from(parent: ViewGroup) : NewsViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = NewsLayoutBinding.inflate(layoutInflater, parent, false)
 
-                return RepoViewHolder(binding)
+                return NewsViewHolder(binding)
             }
         }
     }
