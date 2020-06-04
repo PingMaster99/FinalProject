@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.newsapp.databinding.NewsListFragmentBinding
+
 /**
  * <h1>NewsListFragment</h1>
  *<p>
