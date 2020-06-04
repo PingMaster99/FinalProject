@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="keyword">Palabra clave</string>
+    <string name="author">Autor</string>
+    <string name="minimum_points">Puntos mínimos</string>
+    <string name="search">Buscar</string>
+    <string name="author_format">Autor: %s </string>
+    <string name="points_format">Puntos: %s </string>
+    <string name="date_format">Fecha: %s </string>
+    <string name="instructions">Puede dejar campos vacíos para una búsqueda más general</string>
+</resources>
