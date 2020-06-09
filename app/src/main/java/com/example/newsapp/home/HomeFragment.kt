@@ -3,6 +3,7 @@ package com.example.newsapp.home
 import FirebaseUserLiveData
 import android.content.Context
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -71,12 +72,9 @@ class HomeFragment : Fragment() {
             viewModel.updateHours(args.hoursDeducted)
         }
 
-        viewModel.totalHours.observe(viewLifecycleOwner, Observer {
-            binding.totalHours.text = viewModel.totalHours.value.toString()
-            Log.i("THIS", viewModel.totalHours.toString())
-        })
+        binding.totalHours.text = viewModel.getHours().toString()
 
-        binding.totalHours.text = viewModel.hours.toString()
+
         (activity as AppCompatActivity).supportActionBar?.title = "¡Hola, ${viewModel.user}!"
         (activity as AppCompatActivity).supportActionBar?.subtitle = ""
         // Search button goes to the next fragment
