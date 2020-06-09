@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Proyecto</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_Oportunidades">Oportunidades</string>
+    <string name="title_Inscrito">Inscrito</string>
+    <string name="title_Perfil">Perfil</string>
+</resources>
