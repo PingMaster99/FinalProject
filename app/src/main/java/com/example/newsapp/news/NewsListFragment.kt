@@ -9,12 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.newsapp.databinding.NewsListFragmentBinding
+import com.example.newsapp.registered_events.RegisteredFragmentDirections
 
 /**
  * <h1>NewsListFragment</h1>
@@ -40,6 +42,13 @@ class NewsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(NewsListFragmentDirections.actionNewsListFragmentToHomeFragment(0))
+            }
+
+        })
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         (activity as AppCompatActivity).supportActionBar?.title = "Eventos disponibles"
         (activity as AppCompatActivity).supportActionBar?.subtitle =
             "Presione un evento para inscribirse"

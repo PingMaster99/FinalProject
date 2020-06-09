@@ -21,7 +21,10 @@
         <argument
             android:name="hoursDeducted"
             app:argType="integer"
-            android:defaultValue="-1" />
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_homeFragment_to_registeredFragment"
+            app:destination="@id/registeredFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsListFragment"
@@ -30,10 +33,12 @@
         tools:layout="@layout/news_list_fragment">
         <action
             android:id="@+id/action_newsListFragment_to_homeFragment"
-            app:destination="@id/homeFragment" >
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true">
             <argument
                 android:name="hoursDeducted"
-                android:defaultValue="-1" />
+                android:defaultValue="0" />
         </action>
     </fragment>
     <fragment
@@ -46,7 +51,22 @@
             app:destination="@id/homeFragment" >
             <argument
                 android:name="hoursDeducted"
-                android:defaultValue="-1" />
+                android:defaultValue="0" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/registeredFragment"
+        android:name="com.example.newsapp.registered_events.RegisteredFragment"
+        android:label="RegisteredFragment"
+        tools:layout="@layout/fragment_registered">
+        <action
+            android:id="@+id/action_registeredFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true">
+            <argument
+                android:name="hoursDeducted"
+                android:defaultValue="0" />
         </action>
     </fragment>
 </navigation>

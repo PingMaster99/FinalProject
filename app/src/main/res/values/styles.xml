@@ -56,4 +56,9 @@
         <item name="android:textSize">36sp</item>
     </style>
 
+    <style name="button_style_rounded" parent="button_style">
+        <item name="android:layout_marginBottom">164dp</item>
+        <item name="android:background">@drawable/rounded_button</item>
+    </style>
+
 </resources>

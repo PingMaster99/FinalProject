@@ -17,6 +17,10 @@ import kotlinx.coroutines.*
  * @since 2020-06-02
  **/
 class NewsListViewModel() : ViewModel() {
+    companion object {
+        var registered: MutableList<News> = mutableListOf()
+    }
+
     private lateinit var newsDeferred: Deferred<Website>
     private val _newsList = MutableLiveData<List<News>>()
     val newsList: LiveData<List<News>>
@@ -47,6 +51,7 @@ class NewsListViewModel() : ViewModel() {
 
     fun openNewsUrl(news: News){
         _currentNews.value = news
+        registered.add(news)
     }
 
     private fun getRepos(){

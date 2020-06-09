@@ -32,5 +32,20 @@ class MainActivity : AppCompatActivity() {
         // Data Binding
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         drawerLayout = binding.drawerLayout     // Initializes the drawer layout
+        // navController used in the start fragment
+        val navController = this.findNavController(R.id.navStart)
+
+        // Setup of the navigation drawer
+        NavigationUI.setupActionBarWithNavController(this,navController, drawerLayout)
+        NavigationUI.setupWithNavController(binding.navView, navController)
+    }
+
+    /**
+     * Adds functionality to the hamburger icon
+     * @return Boolean
+     */
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.navStart)
+        return NavigationUI.navigateUp(navController, drawerLayout)
     }
 }

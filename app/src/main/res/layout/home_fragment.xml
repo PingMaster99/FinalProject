@@ -17,15 +17,14 @@
 
         <Button
             android:id="@+id/search"
-            style="@style/button_style"
-            android:layout_marginBottom="124dp"
-            android:background="@drawable/rounded_button"
+            style="@style/button_style_rounded"
+            android:layout_marginTop="468dp"
             android:onClick="@{() -> viewModel.actionViewNews()}"
             android:text="@string/search"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/log_out"
@@ -53,9 +52,9 @@
             android:textSize="200sp"
             app:layout_constraintBottom_toTopOf="@+id/search"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.555" />
 
         <TextView
             android:id="@+id/textView6"
@@ -77,6 +76,18 @@
             app:layout_constraintBottom_toBottomOf="@+id/totalHours"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/myEvents"
+            style="@style/button_style_rounded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="128dp"
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

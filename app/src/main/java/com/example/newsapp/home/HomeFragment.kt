@@ -9,6 +9,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,11 +18,15 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.NavigationUI
+import com.example.newsapp.MainActivity
 import com.example.newsapp.databinding.HomeFragmentBinding
 import com.example.newsapp.login.LoginViewModel
 import com.example.newsapp.network.AlgoliaApiStatus
 import com.firebase.ui.auth.AuthUI
 import com.example.newsapp.R
+import com.example.newsapp.registered_events.RegisteredFragmentDirections
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
 /**
@@ -54,6 +59,13 @@ class HomeFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.show()
         binding = HomeFragmentBinding.inflate(inflater)
         setHasOptionsMenu(true) // Menu contains logout
+
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+            }
+        })
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return binding.root
     }
 
@@ -68,7 +80,7 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         val args: HomeFragmentArgs by navArgs<HomeFragmentArgs>()
 
-        if(args.hoursDeducted > 0) {
+        if(args.hoursDeducted > 0 || args.hoursDeducted < 0) {
             viewModel.updateHours(args.hoursDeducted)
         }
 
@@ -82,6 +94,7 @@ class HomeFragment : Fragment() {
             viewModel.actionViewNews()
         }
 
+        binding.myEvents.setOnClickListener{requireView().findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToRegisteredFragment())}
         binding.logOut.setOnClickListener{AuthUI.getInstance().signOut(requireContext())
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment()) }
         // Observer of the state of ViewNews navigates with parameters
