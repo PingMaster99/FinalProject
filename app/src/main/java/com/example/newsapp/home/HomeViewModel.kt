@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.newsapp.network.AlgoliaApiStatus
-import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 
 /**
@@ -14,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
  *</p>
  *
  * @author Pablo Ruiz (PingMaster99)
- * @version 1.0
+ * @version 2.0
  * @since 2020-06-02
  **/
 class HomeViewModel : ViewModel() {

@@ -14,8 +14,8 @@ import com.example.newsapp.databinding.ActivityMainBinding
  * Main activity that runs all the fragments of NewsApp application
  *</p>
  *
- * @author Pablo Ruiz (PingMaster99)
- * @version 1.0
+ * @author Pablo Ruiz (PingMaster99), Javier Salazar (zombiewafle), Joonho Kim (jkmolina)
+ * @version 2.0
  * @since 2020-06-02
  **/
 class MainActivity : AppCompatActivity() {
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Adds functionality to the hamburger icon
+     * Adds functionality to the return arrows
      * @return Boolean
      */
     override fun onSupportNavigateUp(): Boolean {

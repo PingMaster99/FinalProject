@@ -6,7 +6,16 @@ import androidx.lifecycle.ViewModel
 import com.example.newsapp.network.News
 import com.example.newsapp.news.NewsListFragmentDirections
 import com.example.newsapp.news.NewsListViewModel
-
+/**
+ * <h1>RegisteredViewModel</h1>
+ *<p>
+ * ViewModel used in RegisteredFragment
+ *</p>
+ *
+ * @author Pablo Ruiz (PingMaster99), Javier Salazar (zombiewafle), Joonho Kim (jkmolina)
+ * @version 2.0
+ * @since 2020-06-08
+ **/
 class RegisteredViewModel : ViewModel() {
 
     private val _newsList = MutableLiveData<List<News>>()

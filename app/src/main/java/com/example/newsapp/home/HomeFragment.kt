@@ -37,7 +37,7 @@ import kotlinx.android.synthetic.main.home_fragment.*
  *</p>
  *
  * @author Pablo Ruiz (PingMaster99)
- * @version 1.0
+ * @version 2.0
  * @since 2020-06-02
  **/
 class HomeFragment : Fragment() {
