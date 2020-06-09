@@ -61,4 +61,14 @@
         <item name="android:background">@drawable/rounded_button</item>
     </style>
 
+    <style name="recycler_descriptions">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:textColor">@color/list_grey</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

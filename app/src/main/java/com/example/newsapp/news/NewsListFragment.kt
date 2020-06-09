@@ -4,10 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -15,8 +14,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.newsapp.R
 import com.example.newsapp.databinding.NewsListFragmentBinding
+import com.example.newsapp.network.AlgoliaApi
+import com.example.newsapp.network.AlgoliaApiService
+import com.example.newsapp.network.Website
 import com.example.newsapp.registered_events.RegisteredFragmentDirections
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.selects.select
 
 /**
  * <h1>NewsListFragment</h1>
@@ -29,7 +34,6 @@ import com.example.newsapp.registered_events.RegisteredFragmentDirections
  * @since 2020-06-02
  **/
 class NewsListFragment : Fragment() {
-
     private lateinit var viewModelFactory: NewsListViewModelFactory
     private lateinit var viewModel: NewsListViewModel
     private lateinit var binding: NewsListFragmentBinding
@@ -53,6 +57,7 @@ class NewsListFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.subtitle =
             "Presione un evento para inscribirse"
         binding = NewsListFragmentBinding.inflate(inflater)
+        setHasOptionsMenu(true)
         return binding.root
     }
     /**
@@ -94,5 +99,22 @@ class NewsListFragment : Fragment() {
         } catch (e: Exception) {
             Toast.makeText(this.context, e.message, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.only_valid_events, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(!viewModel.can_assist) {
+            viewModel.updateEvents((java.util.GregorianCalendar.MONTH + 4).toString())
+            viewModel.can_assist = true
+        } else {
+            viewModel.getEvents()
+            viewModel.can_assist = false
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

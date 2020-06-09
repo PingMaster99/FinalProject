@@ -7,10 +7,15 @@
     <string name="author">Autor</string>
     <string name="minimum_points">Puntos mínimos</string>
     <string name="search">Buscar eventos</string>
-    <string name="author_format">Autor: %s </string>
+    <string name="my_events">Mis eventos</string>
+    <string name="author_format">Organizado por: %s </string>
+    <string name="description_format">Descripción: %s </string>
     <string name="points_format">Puntos: %s </string>
     <string name="date_format">Fecha: %s </string>
-    <string name="hours_format">%s horas</string>
+    <string name="place_format">Lugar: %s </string>
+    <string name="hours_format">%s h</string>
+    <string name="can_assist">Eventos próximos a los que puedo asistir</string>
+    <string name="zero">0</string>
     <string name="instructions">Puede dejar campos vacíos para una búsqueda más general</string>
     <string name="login">Iniciar sesión</string>
     <string name="logout">Cerrar sesión</string>

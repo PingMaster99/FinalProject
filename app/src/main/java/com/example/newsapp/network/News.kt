@@ -2,7 +2,7 @@ package com.example.newsapp.network
 /**
  * <h1>News</h1>
  *<p>
- * Data class for the format a news article has
+ * Data class for the format news attributes of an event
  *</p>
  *
  * @author Pablo Ruiz (PingMaster99)
@@ -17,5 +17,4 @@ data class News (
     val type: List<String>,
     val hours: String = date.datetime.month,
     val place: String = "CIT - " + date.datetime.day
-
 )

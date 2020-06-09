@@ -42,8 +42,10 @@ class NewsListViewModel() : ViewModel() {
 
     init {
         startStatus()
-        getRepos()
+        getEvents()
     }
+
+    var can_assist = false
 
     fun startStatus(){
         _status.value = AlgoliaApiStatus.START
@@ -54,7 +56,26 @@ class NewsListViewModel() : ViewModel() {
         registered.add(news)
     }
 
-    private fun getRepos(){
+    fun updateEvents(month: String){
+        coroutineScope.launch {
+            newsDeferred = AlgoliaApi.retrofitService.getCurrentEvents(month)
+            _status.value = AlgoliaApiStatus.LOADING
+            val news = newsDeferred.await().response.holidays
+            _status.value = AlgoliaApiStatus.DONE
+            _newsList.value = news
+            try {
+                _status.value = AlgoliaApiStatus.LOADING
+                val news = newsDeferred.await().response.holidays
+                _status.value = AlgoliaApiStatus.DONE
+                _newsList.value = news
+            } catch (e: Exception){
+                _status.value = AlgoliaApiStatus.ERROR
+                _newsList.value = emptyList()
+            }
+        }
+    }
+
+    fun getEvents(){
         coroutineScope.launch {
             newsDeferred = AlgoliaApi.retrofitService.getNewsAsync()
             try {
@@ -68,7 +89,6 @@ class NewsListViewModel() : ViewModel() {
             }
         }
     }
-
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()

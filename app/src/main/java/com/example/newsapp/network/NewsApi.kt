@@ -7,6 +7,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.text.SimpleDateFormat
+
 // API key da3f60e859b151d6be6f2425863dde900d9095eb
 // Base url for the news API
 private const val BASE_URL = "https://calendarific.com/api/v2/"
@@ -56,9 +58,8 @@ interface AlgoliaApiService {
      * Similar method as the one above, but uses only point number and author as queries
      * it also returns news articles by date (most recent)
      */
-    @GET("search_by_date?tags=story")
-    fun getNoQueryNewsAsync(@Query("numericFilters", encoded = true) points: String?,
-                            @Query("tags", encoded = true) author: String?):
+    @GET("holidays?&api_key=da3f60e859b151d6be6f2425863dde900d9095eb&country=GT&year=2020")
+    fun getCurrentEvents(@Query("month", encoded = true) month: String?):
     // The Coroutine Call Adapter allows us to return a Deferred, a Job with a result
             Deferred<Website>
 }

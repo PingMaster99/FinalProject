@@ -18,53 +18,53 @@
         <Button
             android:id="@+id/search"
             style="@style/button_style_rounded"
-            android:layout_marginTop="468dp"
+            android:layout_marginBottom="16dp"
             android:onClick="@{() -> viewModel.actionViewNews()}"
             android:text="@string/search"
+            app:layout_constraintBottom_toTopOf="@+id/myEvents"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/log_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
             android:background="@drawable/rounded_button_white"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/logout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search"
-            app:layout_constraintVertical_bias="0.675" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/totalHours"
             style="@style/big_title"
             android:layout_width="wrap_content"
             android:layout_height="194dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="200dp"
             android:includeFontPadding="false"
-            android:text="0"
+            android:text="@string/zero"
             android:textAlignment="center"
             android:textColor="#E20CCA4A"
             android:textSize="200sp"
-            app:layout_constraintBottom_toTopOf="@+id/search"
+            app:layout_constraintBottom_toTopOf="@+id/log_out"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.555" />
+            app:layout_constraintVertical_bias="0.604" />
 
         <TextView
             android:id="@+id/textView6"
+            style="@style/subtitle"
             android:text="@string/completed_hours"
-            app:layout_constraintBottom_toTopOf="@+id/search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/totalHours"
-            app:layout_constraintVertical_bias="0.0"
-            style="@style/subtitle" />
+            app:layout_constraintTop_toBottomOf="@+id/totalHours" />
 
         <TextView
             android:id="@+id/textView7"
@@ -80,14 +80,19 @@
         <Button
             android:id="@+id/myEvents"
             style="@style/button_style_rounded"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="128dp"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="143dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="16dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:text="@string/my_events"
+            app:layout_constraintBottom_toTopOf="@+id/log_out"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search" />
+            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

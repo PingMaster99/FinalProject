@@ -70,7 +70,7 @@ class RegisteredFragment : Fragment(){
             Intent.EXTRA_TEXT, "Retiro mi asistencia en el evento $name de la" +
                     " fecha $date.\n\n Saludos cordiales, \n \n\n")
         try {
-            startActivity(Intent.createChooser(intent, "Elija su aplicación de correo"))
+            startActivity(Intent.createChooser(intent, "Enviar correo de retiro"))
             try {
                 findNavController().navigate(RegisteredFragmentDirections.actionRegisteredFragmentToHomeFragment(hours.toInt() * -1))
             } catch (e: Exception) {
