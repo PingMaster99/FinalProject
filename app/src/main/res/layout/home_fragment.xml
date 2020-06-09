@@ -36,6 +36,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/logout"
+            android:textColor="@color/solid_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
