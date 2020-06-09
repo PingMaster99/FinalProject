@@ -80,8 +80,8 @@
         <Button
             android:id="@+id/myEvents"
             style="@style/button_style_rounded"
-            android:layout_width="143dp"
-            android:layout_height="49dp"
+            android:layout_width="140dp"
+            android:layout_height="55dp"
             android:layout_marginBottom="16dp"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
