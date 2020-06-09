@@ -83,22 +83,29 @@ class NewsListFragment : Fragment() {
     // Sends the confirmation email
 
     private fun sendConfirmationEmail(name: String, recipient: String, date: String, hours:String) {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.data = Uri.parse("mailto:")
-        intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("$recipient@uvg.edu.gt"))
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Confirmo asistencia del evento $name")
-        intent.putExtra(Intent.EXTRA_TEXT, "Confirmo mi asistencia en el evento $name de la" +
-                " fecha $date.\n\n Saludos cordiales, \n \n\n")
-        try {
-            startActivity(Intent.createChooser(intent, "Elija su aplicación de correo"))
+        var month = date.subSequence(5, 7).toString().toInt()
+        if(month >= java.util.GregorianCalendar.MONTH + 4) {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.data = Uri.parse("mailto:")
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("$recipient@uvg.edu.gt"))
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Confirmo asistencia del evento $name")
+            intent.putExtra(Intent.EXTRA_TEXT, "Confirmo mi asistencia en el evento $name de la" +
+                    " fecha $date.\n\n Saludos cordiales, \n \n\n")
             try {
-                findNavController().navigate(NewsListFragmentDirections.actionNewsListFragmentToHomeFragment(hours.toInt()))
+                startActivity(Intent.createChooser(intent, "Elija su aplicación de correo"))
+                try {
+                    findNavController().navigate(NewsListFragmentDirections.actionNewsListFragmentToHomeFragment(hours.toInt()))
+                } catch (e: Exception) {
+                }
             } catch (e: Exception) {
+                Toast.makeText(this.context, e.message, Toast.LENGTH_SHORT).show()
             }
-        } catch (e: Exception) {
-            Toast.makeText(this.context, e.message, Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this.context, "El evento ya ha pasado, pero puede añadirlo a sus eventos", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(NewsListFragmentDirections.actionNewsListFragmentToHomeFragment(hours.toInt()))
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

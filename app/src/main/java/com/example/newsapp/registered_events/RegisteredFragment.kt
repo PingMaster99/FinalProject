@@ -61,23 +61,30 @@ class RegisteredFragment : Fragment(){
     }
 
     private fun sendNotGoingEmail(name: String, recipient: String, date: String, hours:String) {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.data = Uri.parse("mailto:")
-        intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("$recipient@uvg.edu.gt"))
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Retiro de asistencia del evento $name")
-        intent.putExtra(
-            Intent.EXTRA_TEXT, "Retiro mi asistencia en el evento $name de la" +
-                    " fecha $date.\n\n Saludos cordiales, \n \n\n")
-        try {
-            startActivity(Intent.createChooser(intent, "Enviar correo de retiro"))
+        val month = date.subSequence(5, 7).toString().toInt()
+        if(month >= java.util.GregorianCalendar.MONTH + 4) {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.data = Uri.parse("mailto:")
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("$recipient@uvg.edu.gt"))
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Retiro de asistencia del evento $name")
+            intent.putExtra(
+                Intent.EXTRA_TEXT, "Retiro mi asistencia en el evento $name de la" +
+                        " fecha $date.\n\n Saludos cordiales, \n \n\n")
             try {
-                findNavController().navigate(RegisteredFragmentDirections.actionRegisteredFragmentToHomeFragment(hours.toInt() * -1))
+                startActivity(Intent.createChooser(intent, "Enviar correo de retiro"))
+                try {
+                    findNavController().navigate(RegisteredFragmentDirections.actionRegisteredFragmentToHomeFragment(hours.toInt() * -1))
+                } catch (e: Exception) {
+                }
             } catch (e: Exception) {
+                Toast.makeText(this.context, e.message, Toast.LENGTH_SHORT).show()
             }
-        } catch (e: Exception) {
-            Toast.makeText(this.context, e.message, Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this.context, "El evento ya pasó, se desasigna sin enviar correo de retiro", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(RegisteredFragmentDirections.actionRegisteredFragmentToHomeFragment(hours.toInt() * -1))
         }
+
     }
 
 
