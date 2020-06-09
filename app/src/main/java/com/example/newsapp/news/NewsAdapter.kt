@@ -65,7 +65,7 @@ class NewsAdapter( val onClickListener: OnClickListener ) :
      */
     companion object DiffCallback : DiffUtil.ItemCallback<News>() {
         override fun areItemsTheSame(oldItem: News, newItem: News): Boolean {
-            return oldItem.created_at == newItem.created_at
+            return oldItem.name == newItem.name
         }
 
         override fun areContentsTheSame(oldItem: News, newItem: News): Boolean {

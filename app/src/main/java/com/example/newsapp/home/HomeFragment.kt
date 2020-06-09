@@ -1,5 +1,6 @@
 package com.example.newsapp.home
 
+import FirebaseUserLiveData
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,9 +12,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.map
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.newsapp.databinding.HomeFragmentBinding
+import com.example.newsapp.login.LoginViewModel
 import com.example.newsapp.network.AlgoliaApiStatus
+import com.firebase.ui.auth.AuthUI
+
 /**
  * <h1>HomeFragment</h1>
  *<p>
@@ -31,9 +38,6 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: HomeFragmentBinding
 
-    // Arguments for the next fragment
-    private lateinit var author: String
-    private lateinit var points: String
 
     /**
      * Builds the app initialization displays the information requested
@@ -66,29 +70,19 @@ class HomeFragment : Fragment() {
             viewModel.actionViewNews()
         }
 
+        binding.logOut.setOnClickListener{AuthUI.getInstance().signOut(requireContext())
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment()) }
         // Observer of the state of ViewNews navigates with parameters
+
         viewModel.viewNews.observe(viewLifecycleOwner, Observer {
-            // Author
-            if(binding.author.text.toString() != "") {
-                author = "author_${binding.author.text}"
-            } else {
-                author = "story"    // General author if empty
-            }
-
-            // Points
-            if(binding.minimumPoints.text.toString() != "") {
-                points = "points>${binding.minimumPoints.text}"
-            } else {
-                points = "points>-1"    // General points if empty
-            }
-
             // Navigates to the next fragment if button was pressed
             if(it) {
                 requireView().hideKeyboard()
                 requireView().findNavController().navigate(
-                    HomeFragmentDirections.actionHomeFragmentToNewsListFragment(author,
-                        binding.keyword.text.toString(), points)
+                    HomeFragmentDirections.actionHomeFragmentToNewsListFragment("author",
+                        "", "points")
                 )
+
                 viewModel.viewNewsComplete()
             }
         })

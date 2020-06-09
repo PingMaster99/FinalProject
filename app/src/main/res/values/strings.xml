@@ -8,4 +8,6 @@
     <string name="points_format">Puntos: %s </string>
     <string name="date_format">Fecha: %s </string>
     <string name="instructions">Puede dejar campos vacíos para una búsqueda más general</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="login_instructions">Por favor utilice su cuenta UVG</string>
 </resources>

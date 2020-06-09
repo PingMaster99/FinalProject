@@ -52,14 +52,18 @@ class NewsListViewModel(private val query: String, private val author: String, p
     private fun getRepos(){
         coroutineScope.launch {
             if(query != "") {
-                newsDeferred = AlgoliaApi.retrofitService.getNewsAsync(query, points = points, author = author)
+                newsDeferred = AlgoliaApi.retrofitService.getNewsAsync()
 
             } else {
-                newsDeferred = AlgoliaApi.retrofitService.getNoQueryNewsAsync(points, author)
+                newsDeferred = AlgoliaApi.retrofitService.getNewsAsync()
             }
+            _status.value = AlgoliaApiStatus.LOADING
+            val news = newsDeferred.await().response.holidays
+            _status.value = AlgoliaApiStatus.DONE
+            _newsList.value = news
             try {
                 _status.value = AlgoliaApiStatus.LOADING
-                val news = newsDeferred.await().hits
+                val news = newsDeferred.await().response.holidays
                 _status.value = AlgoliaApiStatus.DONE
                 _newsList.value = news
             } catch (e: Exception){

@@ -10,10 +10,9 @@ package com.example.newsapp.network
  * @since 2020-06-02
  **/
 data class News (
-    val created_at: String,
-    val title: String,
-    val url: String?,
-    val author: String,
-    val points: String,
-    val formatted_date: String = created_at.substring(0,10) // Displays in format: year-month-day
+    val name: String,
+    val description: String,
+    val date: Date,
+    val formatted_date: String = date.iso,
+    val type: List<String>
 )

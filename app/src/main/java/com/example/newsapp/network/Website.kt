@@ -10,5 +10,5 @@ package com.example.newsapp.network
  * @since 2020-06-03
  **/
 data class Website (
-    var hits: List<News>
+    var response: Event
 )
