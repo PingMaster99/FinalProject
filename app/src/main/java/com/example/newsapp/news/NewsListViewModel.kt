@@ -16,7 +16,7 @@ import kotlinx.coroutines.*
  * @version 1.0
  * @since 2020-06-02
  **/
-class NewsListViewModel(private val query: String, private val author: String, private val points: String) : ViewModel() {
+class NewsListViewModel() : ViewModel() {
     private lateinit var newsDeferred: Deferred<Website>
     private val _newsList = MutableLiveData<List<News>>()
     val newsList: LiveData<List<News>>
@@ -51,12 +51,8 @@ class NewsListViewModel(private val query: String, private val author: String, p
 
     private fun getRepos(){
         coroutineScope.launch {
-            if(query != "") {
-                newsDeferred = AlgoliaApi.retrofitService.getNewsAsync()
 
-            } else {
-                newsDeferred = AlgoliaApi.retrofitService.getNewsAsync()
-            }
+            newsDeferred = AlgoliaApi.retrofitService.getNewsAsync()
             _status.value = AlgoliaApiStatus.LOADING
             val news = newsDeferred.await().response.holidays
             _status.value = AlgoliaApiStatus.DONE

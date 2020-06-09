@@ -12,11 +12,11 @@ import androidx.lifecycle.ViewModelProvider
  * @version 1.0
  * @since 2020-06-02
  **/
-class NewsListViewModelFactory(private val query: String, private val username: String, private val points: String) : ViewModelProvider.Factory {
+class NewsListViewModelFactory() : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NewsListViewModel::class.java)) {
-            return NewsListViewModel(query, username, points) as T
+            return NewsListViewModel() as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

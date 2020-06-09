@@ -10,7 +10,7 @@ class LoginViewModel : ViewModel() {
     enum class AuthenticationState {
         AUTHENTICATED, UNAUTHENTICATED, INVALID_AUTHENTICATION
     }
-
+    var authenticated = false
     val authenticationState = FirebaseUserLiveData().map { user ->
         if (user != null) {
             AuthenticationState.AUTHENTICATED
@@ -18,8 +18,4 @@ class LoginViewModel : ViewModel() {
             AuthenticationState.UNAUTHENTICATED
         }
     }
-    fun setUnauthenticated() {
-        AuthenticationState.UNAUTHENTICATED
-    }
-
 }

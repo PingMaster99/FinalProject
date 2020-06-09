@@ -1,13 +1,21 @@
 <resources>
-    <string name="app_name">NewsApp</string>
+    <string name="app_name">PracticApp</string>
+    <string name="pra">PRA</string>
+    <string name="ctic">CTIC</string>
+    <string name="app">APP</string>
     <string name="keyword">Palabra clave</string>
     <string name="author">Autor</string>
     <string name="minimum_points">Puntos mínimos</string>
-    <string name="search">Buscar</string>
+    <string name="search">Buscar eventos</string>
     <string name="author_format">Autor: %s </string>
     <string name="points_format">Puntos: %s </string>
     <string name="date_format">Fecha: %s </string>
+    <string name="hours_format">%s horas</string>
     <string name="instructions">Puede dejar campos vacíos para una búsqueda más general</string>
     <string name="login">Iniciar sesión</string>
+    <string name="logout">Cerrar sesión</string>
     <string name="login_instructions">Por favor utilice su cuenta UVG</string>
+    <string name="completed_hours">horas realizadas</string>
+    <string name="welcome_message">¡Hola, %s!</string>
+    <string name="you_have">Tienes</string>
 </resources>

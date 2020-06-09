@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.newsapp.network.AlgoliaApiStatus
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
+
 /**
  * <h1>HomeViewModel</h1>
  *<p>
@@ -20,6 +23,7 @@ class HomeViewModel : ViewModel() {
     val viewNews: LiveData<Boolean>
         get() = _viewNews
 
+    val user = FirebaseAuth.getInstance().currentUser!!.displayName!!.substringBefore(" ")
     // API status
     private val _status = MutableLiveData<AlgoliaApiStatus>()
     val status: LiveData<AlgoliaApiStatus>

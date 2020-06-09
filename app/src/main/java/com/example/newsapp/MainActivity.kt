@@ -32,21 +32,5 @@ class MainActivity : AppCompatActivity() {
         // Data Binding
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         drawerLayout = binding.drawerLayout     // Initializes the drawer layout
-
-        // navController
-        val navController = this.findNavController(R.id.navStart)
-
-        // Setup of return arrow in the appbar when navigating
-        NavigationUI.setupActionBarWithNavController(this,navController)
-        NavigationUI.setupWithNavController(binding.navView, navController)
-    }
-
-    /**
-     * Adds functionality to the return arrow
-     * @return Boolean
-     */
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = this.findNavController(R.id.navStart)
-        return NavigationUI.navigateUp(navController, drawerLayout)
     }
 }

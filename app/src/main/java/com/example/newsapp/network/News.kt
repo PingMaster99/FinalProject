@@ -14,5 +14,8 @@ data class News (
     val description: String,
     val date: Date,
     val formatted_date: String = date.iso,
-    val type: List<String>
+    val type: List<String>,
+    val hours: String = date.datetime.month,
+    val place: String = "CIT - " + date.datetime.day
+
 )

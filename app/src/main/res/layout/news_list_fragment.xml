@@ -14,7 +14,7 @@
         tools:context=".news.NewsListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:background="@drawable/bakcground"
+            android:background="@drawable/poly_background"
             android:id="@+id/newsList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

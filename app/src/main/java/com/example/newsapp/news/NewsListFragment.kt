@@ -39,9 +39,9 @@ class NewsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppCompatActivity).supportActionBar?.title = "Noticias relacionadas"
+        (activity as AppCompatActivity).supportActionBar?.title = "Eventos disponibles"
         (activity as AppCompatActivity).supportActionBar?.subtitle =
-            "Presione una noticia para visitar el enlace"
+            "Presione un evento para inscribirse"
         binding = NewsListFragmentBinding.inflate(inflater)
         return binding.root
     }
@@ -52,8 +52,8 @@ class NewsListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.lifecycleOwner = this
-        val args: NewsListFragmentArgs by navArgs<NewsListFragmentArgs>()
-        viewModelFactory = NewsListViewModelFactory(args.query, args.username, args.points)
+
+        viewModelFactory = NewsListViewModelFactory()
         viewModel = ViewModelProvider(this, viewModelFactory).get(NewsListViewModel::class.java)
         binding.viewModel = viewModel
         binding.newsList.adapter = NewsAdapter(NewsAdapter.OnClickListener{

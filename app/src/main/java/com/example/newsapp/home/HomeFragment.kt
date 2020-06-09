@@ -3,10 +3,8 @@ package com.example.newsapp.home
 import FirebaseUserLiveData
 import android.content.Context
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +18,7 @@ import com.example.newsapp.databinding.HomeFragmentBinding
 import com.example.newsapp.login.LoginViewModel
 import com.example.newsapp.network.AlgoliaApiStatus
 import com.firebase.ui.auth.AuthUI
+import com.example.newsapp.R
 
 /**
  * <h1>HomeFragment</h1>
@@ -48,9 +47,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Updates title and subtitle
-        (activity as AppCompatActivity).supportActionBar?.title = "Buscador de noticias"
-        (activity as AppCompatActivity).supportActionBar?.subtitle = ""
+        (activity as AppCompatActivity).supportActionBar?.show()
         binding = HomeFragmentBinding.inflate(inflater)
+        setHasOptionsMenu(true) // Menu contains logout
         return binding.root
     }
 
@@ -63,8 +62,8 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = this
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         binding.viewModel = viewModel
-
-
+        (activity as AppCompatActivity).supportActionBar?.title = "¡Hola, ${viewModel.user}!"
+        (activity as AppCompatActivity).supportActionBar?.subtitle = ""
         // Search button goes to the next fragment
         binding.search.setOnClickListener {
             viewModel.actionViewNews()
@@ -79,8 +78,7 @@ class HomeFragment : Fragment() {
             if(it) {
                 requireView().hideKeyboard()
                 requireView().findNavController().navigate(
-                    HomeFragmentDirections.actionHomeFragmentToNewsListFragment("author",
-                        "", "points")
+                    HomeFragmentDirections.actionHomeFragmentToNewsListFragment()
                 )
 
                 viewModel.viewNewsComplete()
@@ -102,5 +100,33 @@ class HomeFragment : Fragment() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE)
                 as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    /**
+     * Generates the menu
+     * @param menu
+     * @param inflater reads XML
+     */
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.logout, menu)
+    }
+
+    /**
+     * Adds functionality to the different menu options
+     * @param item from the menu
+     * @return Boolean
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        // Item clicked
+        when(item.itemId) {
+            // Register guest
+            R.id.logout_menu-> {
+                AuthUI.getInstance().signOut(requireContext())
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

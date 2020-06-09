@@ -35,8 +35,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppCompatActivity).supportActionBar?.title = "Iniciar sesión"
-        (activity as AppCompatActivity).supportActionBar?.subtitle = ""
+        (activity as AppCompatActivity).supportActionBar?.hide()
         // Inflate the layout for the corresponding fragment
         binding = FragmentLoginBinding.inflate(inflater)
 
@@ -47,7 +46,6 @@ class LoginFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         binding.lifecycleOwner = this
         binding.loginButton.setOnClickListener {launchSignIn()}
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,6 +67,11 @@ class LoginFragment : Fragment() {
                 Log.i("THIS", "Sign in unsuccessful ${response?.error?.errorCode}")
             }
         }
+        if(viewModel.authenticated) {
+            findNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+            )
+        }
     }
 
 
@@ -77,12 +80,11 @@ class LoginFragment : Fragment() {
         viewModel.authenticationState.observe(viewLifecycleOwner, Observer { authenticationState ->
             when (authenticationState) {
                 LoginViewModel.AuthenticationState.AUTHENTICATED -> {
-                    findNavController().navigate(
-                        LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                    )
+                    viewModel.authenticated = true
+
                 }
                 else -> {
-
+                    viewModel.authenticated = false
                 }
             }
 
