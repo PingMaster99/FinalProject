@@ -37,7 +37,7 @@ class LoginFragment : Fragment() {
     ): View? {
         (activity as AppCompatActivity).supportActionBar?.title = "Iniciar sesión"
         (activity as AppCompatActivity).supportActionBar?.subtitle = ""
-        // Inflate the layout for this fragment
+        // Inflate the layout for the corresponding fragment
         binding = FragmentLoginBinding.inflate(inflater)
 
         return binding.root
