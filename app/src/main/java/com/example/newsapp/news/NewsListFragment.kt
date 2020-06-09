@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.newsapp.databinding.NewsListFragmentBinding
 
@@ -61,13 +62,13 @@ class NewsListFragment : Fragment() {
         })
 
         viewModel.currentNews.observe(viewLifecycleOwner, Observer {
-            openNewsPage(it.name, it.type[0].substringBefore(" "), it.formatted_date)
+            sendConfirmationEmail(it.name, it.type[0].substringBefore(" "), it.formatted_date, it.hours)
         })
     }
 
-    // Opens a new page if url exists
+    // Sends the confirmation email
 
-    private fun openNewsPage(name: String, recipient: String, date: String) {
+    private fun sendConfirmationEmail(name: String, recipient: String, date: String, hours:String) {
         val intent = Intent(Intent.ACTION_SEND)
         intent.data = Uri.parse("mailto:")
         intent.type = "text/plain"
@@ -77,6 +78,10 @@ class NewsListFragment : Fragment() {
                 " fecha $date.\n\n Saludos cordiales, \n \n\n")
         try {
             startActivity(Intent.createChooser(intent, "Elija su aplicación de correo"))
+            try {
+                findNavController().navigate(NewsListFragmentDirections.actionNewsListFragmentToHomeFragment(hours.toInt()))
+            } catch (e: Exception) {
+            }
         } catch (e: Exception) {
             Toast.makeText(this.context, e.message, Toast.LENGTH_SHORT).show()
         }

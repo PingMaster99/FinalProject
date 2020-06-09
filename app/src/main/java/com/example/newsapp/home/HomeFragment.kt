@@ -3,6 +3,7 @@ package com.example.newsapp.home
 import FirebaseUserLiveData
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.inputmethod.InputMethodManager
@@ -14,11 +15,13 @@ import androidx.lifecycle.map
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.newsapp.databinding.HomeFragmentBinding
 import com.example.newsapp.login.LoginViewModel
 import com.example.newsapp.network.AlgoliaApiStatus
 import com.firebase.ui.auth.AuthUI
 import com.example.newsapp.R
+import kotlinx.android.synthetic.main.home_fragment.*
 
 /**
  * <h1>HomeFragment</h1>
@@ -62,6 +65,18 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = this
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         binding.viewModel = viewModel
+        val args: HomeFragmentArgs by navArgs<HomeFragmentArgs>()
+
+        if(args.hoursDeducted > 0) {
+            viewModel.updateHours(args.hoursDeducted)
+        }
+
+        viewModel.totalHours.observe(viewLifecycleOwner, Observer {
+            binding.totalHours.text = viewModel.totalHours.value.toString()
+            Log.i("THIS", viewModel.totalHours.toString())
+        })
+
+        binding.totalHours.text = viewModel.hours.toString()
         (activity as AppCompatActivity).supportActionBar?.title = "¡Hola, ${viewModel.user}!"
         (activity as AppCompatActivity).supportActionBar?.subtitle = ""
         // Search button goes to the next fragment

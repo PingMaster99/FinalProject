@@ -51,12 +51,7 @@ class NewsListViewModel() : ViewModel() {
 
     private fun getRepos(){
         coroutineScope.launch {
-
             newsDeferred = AlgoliaApi.retrofitService.getNewsAsync()
-            _status.value = AlgoliaApiStatus.LOADING
-            val news = newsDeferred.await().response.holidays
-            _status.value = AlgoliaApiStatus.DONE
-            _newsList.value = news
             try {
                 _status.value = AlgoliaApiStatus.LOADING
                 val news = newsDeferred.await().response.holidays

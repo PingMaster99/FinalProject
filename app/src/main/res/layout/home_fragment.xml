@@ -42,13 +42,14 @@
             app:layout_constraintVertical_bias="0.675" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/totalHours"
             style="@style/big_title"
-            android:layout_width="134dp"
+            android:layout_width="wrap_content"
             android:layout_height="194dp"
             android:includeFontPadding="false"
             android:text="0"
             android:textAlignment="center"
+            android:textColor="#E20CCA4A"
             android:textSize="200sp"
             app:layout_constraintBottom_toTopOf="@+id/search"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +63,7 @@
             app:layout_constraintBottom_toTopOf="@+id/search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/totalHours"
             app:layout_constraintVertical_bias="0.0"
             style="@style/subtitle" />
 
@@ -72,9 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="176dp"
             android:text="@string/you_have"
-            android:textAlignment="center"
             android:textAppearance="@style/subtitle"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
+            app:layout_constraintBottom_toBottomOf="@+id/totalHours"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
